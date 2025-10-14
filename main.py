@@ -3,15 +3,15 @@ import pandas as pd
 import random
 
 def objects_generator(n):
-    stock = Warehouse()
+    W1 = Warehouse()
 
     df = pd.read_excel("fixtures/objects_data.xlsx")
     sample_df = df.sample(n=n)
     tableau_tuples_random = list(sample_df.itertuples(index=False, name=None))
 
     for type, name in tableau_tuples_random:
-        stock.stock.add_object(Object(type,name))
-    return stock
+        W1.add_object(type,name)
+    return W1
 
 datas = objects_generator(100)
 datas.stock.print_stock()
