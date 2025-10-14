@@ -43,6 +43,8 @@ def graph_generator(n: int):
 
     for name in villes_aleatoires:
         graph.add_city(name)
+        graph.nodes[name].add_warehouse(objects_generator(100))
+
 
     for _, row in df_filtered.iterrows():
         city1 = row['City1']
@@ -54,3 +56,5 @@ def graph_generator(n: int):
 
 graph = graph_generator(5)
 print(graph)
+Paris = graph.nodes['Paris'].warehouses
+print(Paris[0].stock.print_stock())

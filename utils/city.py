@@ -5,5 +5,5 @@ class City():
         self.name = name
         self.warehouses = []
 
-    def add_warehouse(self):
-        self.warehouses.append(Warehouse())
+    def add_warehouse(self,warehouse):
+        self.warehouses.append(warehouse)
