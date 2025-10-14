@@ -1,22 +1,41 @@
-class Graph : 
-    def __init__(self,n):
-        self.n = n
-        self.adj = {}
+from utils.city import City
 
-    def add_edge(self, u, v, w):
-        # Si le sommet u n'existe pas encore, on l'initialise
-        if u not in self.adj:
-            self.adj[u] = []
-        # Si le sommet v n'existe pas encore, on l'initialise aussi
-        if v not in self.adj:
-            self.adj[v] = []
+class Graph:
+    def __init__(self):
 
-        # Ajouter l'arête u -> v
-        self.adj[u].append((v, w))
-        # Si ton graphe est non orienté, ajoute aussi v -> u
-        self.adj[v].append((u, w))
+        self.nodes = {}
+        self.edges = {}
 
+    def add_city(self, city_name):
 
-    def print_neighbors(self):
-        for ville, voisins in self.adj.items():
-            print(ville, ":", voisins)
+        if city_name not in self.nodes:
+            self.nodes[city_name] = City(city_name)
+            self.edges[city_name] = {}
+        else:
+            print(f"La ville '{city_name}' existe déjà.")
+
+    def add_edge(self, city_name1, city_name2, weight=1):
+
+        if city_name1 not in self.nodes:
+            self.add_city(city_name1)
+        if city_name2 not in self.nodes:
+            self.add_city(city_name2)
+
+        self.edges[city_name1][city_name2] = weight
+        self.edges[city_name2][city_name1] = weight  
+
+    def get_neighbors(self, city_name):
+
+        if city_name not in self.nodes:
+            raise ValueError(f"La ville '{city_name}' n'existe pas.")
+        return self.edges[city_name]
+
+    def get_city(self, city_name):
+
+        return self.nodes.get(city_name, None)
+
+    def __repr__(self):
+        repr_str = "Graph:\n"
+        for city, neighbors in self.edges.items():
+            repr_str += f"  {city} -> {neighbors}\n"
+        return repr_str
