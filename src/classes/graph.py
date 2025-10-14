@@ -1,4 +1,4 @@
-from utils.city import City
+from src.classes.city import City
 
 class Graph:
     def __init__(self):

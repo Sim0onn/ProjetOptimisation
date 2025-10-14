@@ -1,4 +1,4 @@
-from utils.warehouse import Warehouse
+from src.classes.warehouse import Warehouse
 
 class City():
     def __init__(self,name):

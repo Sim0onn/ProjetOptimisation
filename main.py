@@ -1,4 +1,4 @@
-from utils import Object, Warehouse, Graph
+from src.classes import Object, Warehouse, Graph
 import pandas as pd
 import random
 

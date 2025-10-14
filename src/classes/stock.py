@@ -1,4 +1,4 @@
-from utils.object import Object
+from src.classes.object import Object
 
 class Stock():
 

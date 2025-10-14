@@ -1,4 +1,4 @@
-from utils.stock import Stock
+from src.classes.stock import Stock
 
 class Truck():
     
