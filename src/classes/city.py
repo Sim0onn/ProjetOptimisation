@@ -5,5 +5,12 @@ class City():
         self.name = name
         self.warehouses = []
 
-    def add_warehouse(self,warehouse):
+    def addWarehouse(self,warehouse):
         self.warehouses.append(warehouse)
+
+    def printWarehouse(self):
+        for ware in self.warehouses:
+            print(ware.getStock())
+    
+    def numberOfWarehouses(self):
+        return len(self.warehouses)

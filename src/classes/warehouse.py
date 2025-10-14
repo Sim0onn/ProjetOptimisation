@@ -5,5 +5,8 @@ class Warehouse():
     def __init__(self):
         self.stock = Stock()
         
-    def add_object(self,type,name):
-        self.stock.add_object(type,name)
+    def addObject(self,type,name):
+        self.stock.addObject(type,name)
+    
+    def getStock(self):
+        return self.stock.inventory
