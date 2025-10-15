@@ -1,7 +1,9 @@
 from src.classes import Object, Warehouse, Graph
+from src.utils import generateTrafficGraphs
 import pandas as pd
 import random
 import time
+
 def objectsGenerator(n):
     W1 = Warehouse()
 
@@ -53,6 +55,9 @@ def graphGenerator(n: int):
         graph.addEdge(city1, city2, distance)
 
     return graph
+
+
+
 start = time.time()
 graph = graphGenerator(20)
 end = time.time()
