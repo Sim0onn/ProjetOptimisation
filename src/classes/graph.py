@@ -24,7 +24,7 @@ class Graph:
         self.edges[city_name1][city_name2] = weight
         self.edges[city_name2][city_name1] = weight  
 
-    def getNeighbors(self, city_name):
+    def getEdge(self, city_name):
 
         if city_name not in self.nodes:
             raise ValueError(f"La ville '{city_name}' n'existe pas.")
@@ -44,6 +44,12 @@ class Graph:
                     seen.add((city1, city2))
         return edge_list
 
+    def getDegree(self):
+        return len(self.nodes)
+    
+    def getDegreeNode(self,node):
+        return len(self.edges[node])
+    
     def __repr__(self):
         repr_str = "Graph:\n"
         for city, neighbors in self.edges.items():

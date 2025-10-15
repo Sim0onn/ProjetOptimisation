@@ -8,6 +8,5 @@ class Stock():
     def addObject(self,type,name):
         self.inventory.append(Object(type,name))
     
-    def printStock(self):
-        for i in self.inventory:
-            print("Type : ",i.type," Name : ",i.name)
+    def getStock(self):
+        return [i for i in self.inventory]
