@@ -24,7 +24,7 @@ class Graph:
         self.edges[city_name1][city_name2] = weight
         self.edges[city_name2][city_name1] = weight  
 
-    def getNeighbors(self, city_name):
+    def getEdge(self, city_name):
 
         if city_name not in self.nodes:
             raise ValueError(f"La ville '{city_name}' n'existe pas.")

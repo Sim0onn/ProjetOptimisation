@@ -1,7 +1,7 @@
 from src.classes import Object, Warehouse, Graph
 import pandas as pd
 import random
-
+import time
 def objectsGenerator(n):
     W1 = Warehouse()
 
@@ -18,7 +18,7 @@ def objectsGenerator(n):
 
 def graphGenerator(n: int):
 
-    df = pd.read_excel("fixtures/cities_data.xlsx")
+    df = pd.read_csv("fixtures/cities_data.csv")
     df.columns = df.columns.str.strip()
 
     # Liste de toutes les villes uniques
@@ -53,11 +53,12 @@ def graphGenerator(n: int):
         graph.addEdge(city1, city2, distance)
 
     return graph
-
-graph = graphGenerator(5)
+start = time.time()
+graph = graphGenerator(20)
+end = time.time()
 print(graph)
-# Paris = graph.nodes['Paris'].warehouses
-# print(Paris[0].stock.printStock())
+print(end-start)
 first_key = sorted(graph.nodes.keys())[0]
-Paris = graph.nodes[first_key]
-print(Paris.numberOfWarehouses())
+Paris = graph.nodes[first_key].warehouses
+print(Paris[0].getStock())
+print(graph.nodes[first_key].numberOfWarehouses())
