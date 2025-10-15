@@ -34,6 +34,12 @@ class Graph:
 
         return self.nodes.get(city_name, None)
 
+    def getDegree(self):
+        return len(self.nodes)
+    
+    def getDegreeNode(self,node):
+        return len(self.edges[node])
+    
     def __repr__(self):
         repr_str = "Graph:\n"
         for city, neighbors in self.edges.items():
