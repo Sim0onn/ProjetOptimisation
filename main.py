@@ -1,5 +1,5 @@
 import time
-from generatorGraph import generatorGraph
+from src.utils.generators.generatorGraph import generatorGraph
 
 start = time.time()
 graph = generatorGraph(20)

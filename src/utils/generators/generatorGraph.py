@@ -1,6 +1,6 @@
 import random 
 import pandas as pd
-from generatorObjects import generatorObjects
+from src.utils.generators.generatorObjects import generatorObjects
 from src.classes import Graph
 
 def generatorGraph(n: int):

@@ -13,3 +13,4 @@ def generatorObjects(n):
     return W1
 
 datas = generatorObjects(100)
+
