@@ -33,6 +33,16 @@ class Graph:
     def getCity(self, city_name):
 
         return self.nodes.get(city_name, None)
+    
+    def getEdges(self):
+        edge_list = []
+        seen = set()
+        for city1, neighbors in self.edges.items():
+            for city2, weight in neighbors.items():
+                if (city2, city1) not in seen:
+                    edge_list.append((city1, city2, weight))
+                    seen.add((city1, city2))
+        return edge_list
 
     def getDegree(self):
         return len(self.nodes)
