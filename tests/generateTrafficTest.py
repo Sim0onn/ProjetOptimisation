@@ -1,5 +1,5 @@
 from src.utils.generators.generatorGraph import generatorGraph
-from utils.utilsTraffic import generateTrafficGraphs
+from src.utils.utilsTraffic import generateTrafficGraphs
 
 def main():
     # Générer le graphe de base avec 20 villes
