@@ -8,8 +8,8 @@ coeffFluide = 1
 coeffModere = 1.15
 coeffLourd = 1.3
 
-importanceTemps = 1
-importanceConso = 1
+importanceTemps = 0.4
+importanceConso = 0.6
 
 def generateTrafficGraphs(base_graph):
     trafficGraphs = []

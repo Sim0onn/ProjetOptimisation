@@ -13,7 +13,7 @@ def main():
 
 
     traffic_graphs = generateTrafficGraphs(base_graph)
-    
+
 
     # Afficher les graphes générés
     for i, traffic_graph in enumerate(traffic_graphs):
