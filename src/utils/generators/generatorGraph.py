@@ -1,10 +1,10 @@
-import random 
 import pandas as pd
-from src.utils.generators.generatorObjects import generatorObjects
-from src.classes import Graph
+import random
+from src.classes.graph import Graph  
+from src.utils.generators.generatorObjects  import generatorObjects 
 
 def generatorGraph(n: int):
-
+    # Lecture du fichier CSV
     df = pd.read_csv("fixtures/cities_data.csv")
     df.columns = df.columns.str.strip()
 
@@ -20,26 +20,26 @@ def generatorGraph(n: int):
     # Sélection aléatoire de n villes
     villes_aleatoires = random.sample(villes, n)
 
-    # Filtrage des arêtes qui ne concernent que ces villes
+    # Filtrage des arêtes (routes) qui ne concernent que ces villes sélectionnées
     df_filtered = df[
         (df['City1'].isin(villes_aleatoires)) &
         (df['City2'].isin(villes_aleatoires))
     ]
 
+    # Création du graphe
     graph = Graph()
 
+    # Ajout des villes + génération d'entrepôts
     for name in villes_aleatoires:
         graph.addCity(name)
-        graph.nodes[name].addWarehouse(generatorObjects(100))
+        # On accède directement à l'objet City
+        graph.cities[name].addWarehouse(generatorObjects(100))
 
-
+    # Ajout des routes
     for _, row in df_filtered.iterrows():
         city1 = row['City1']
         city2 = row['City2']
         distance = row['Distance']
-        graph.addEdge(city1, city2, distance)
+        graph.addRoad(city1, city2, distance) 
 
     return graph
-
-graph = generatorGraph(20)
-print(graph)
