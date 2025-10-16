@@ -4,7 +4,7 @@ class Road():
     def __init__(self, start_city: City, end_city: City, distance: float):
         self.start_city = start_city
         self.end_city = end_city
-        self.distance = distance
+        self.distance = round(distance)
 
     def getStartCity(self):
         return self.start_city
