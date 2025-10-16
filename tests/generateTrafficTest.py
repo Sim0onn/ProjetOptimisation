@@ -10,10 +10,7 @@ def main():
 
     # Générer les graphes en fonction du trafic
     print("\nGénération des graphes en fonction du trafic...")
-
-
     traffic_graphs = generateTrafficGraphs(base_graph)
-
 
     # Afficher les graphes générés
     for i, traffic_graph in enumerate(traffic_graphs):

@@ -42,7 +42,11 @@ def generateTrafficGraphs(base_graph):
                 congestionMin, congestionMax = 1.1, 1.4
 
 
-        for city1, city2, distance in base_graph.getEdges():
+        for road in base_graph.getAllRoads():
+            start_city = road.getStartCity().getName()
+            end_city = road.getEndCity().getName()
+            distance = road.getDistance()
+
             congestionTraffic = random.uniform(congestionMin, congestionMax)
 
             tempsTrajet = (distance / vitesseBase) * congestionTraffic
@@ -56,9 +60,9 @@ def generateTrafficGraphs(base_graph):
 
             nouveauPoids = (importanceTemps * tempsTrajet) + (importanceConso * consoTrajet)
 
-            trafficGraph.addCity(city1)
-            trafficGraph.addCity(city2)
-            trafficGraph.addEdge(city1, city2, nouveauPoids)
+            trafficGraph.addCity(start_city)
+            trafficGraph.addCity(end_city)
+            trafficGraph.addRoad(start_city, end_city, nouveauPoids)
 
         trafficGraphs.append(trafficGraph)
 
