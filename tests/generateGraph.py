@@ -46,5 +46,14 @@ def main():
     print("\n🖼️ Représentation textuelle du graphe :")
     print(graph)
 
+    # 9️⃣ Recherche d'une ville possédant un objet spécifique dans ses entrepôts
+    object_type = "Food"
+    object_name = "Milk"
+    city_with_object = graph.getCityFromWarehouses(object_type, object_name)
+    if city_with_object:
+        print(f"\n🔍 La ville '{city_with_object}' possède l'objet '{object_name}' de type '{object_type}' dans ses entrepôts.")
+    else:
+        print(f"\n🔍 Aucune ville ne possède l'objet '{object_name}' de type '{object_type}' dans ses entrepôts.")
+
 if __name__ == "__main__":
     main()

@@ -25,3 +25,10 @@ class City():
     
     def numberOfWarehouses(self):
         return len(self.warehouses)
+    
+    def getObjectFromWarehouses(self,type,name):
+        for ware in self.warehouses:
+            obj = ware.getObject(type,name)
+            if obj is not None:
+                return True
+        return None
