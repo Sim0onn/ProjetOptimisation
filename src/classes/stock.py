@@ -10,3 +10,9 @@ class Stock():
     
     def getStock(self):
         return [i for i in self.inventory]
+    
+    def getObject(self,type,name):
+        for obj in self.inventory:
+            if obj.type == type and obj.name == name:
+                return True
+        return None

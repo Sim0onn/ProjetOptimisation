@@ -14,3 +14,5 @@ class Warehouse():
     def addObject(self,type,name):
         self.stock.addObject(type,name)
     
+    def getObject(self,type,name):
+        return self.stock.getObject(type,name)

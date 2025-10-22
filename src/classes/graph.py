@@ -71,6 +71,13 @@ class Graph:
         return len(self.getRoadsFrom(city_name))
 
 
+    def getCityFromWarehouses(self, type, name):
+        for city in self.cities.values():
+            if city.getObjectFromWarehouses(type, name):
+                return city.getName()
+        return None
+
+
     def __repr__(self):
         repr_str = "Graph:\n"
         for road in self.roads:
