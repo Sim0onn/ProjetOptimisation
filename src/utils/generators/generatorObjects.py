@@ -11,5 +11,3 @@ def generatorObjects(n):
     for type, name in tableau_tuples_random:
         W1.addObject(type,name)
     return W1
-
-datas = generatorObjects(100)

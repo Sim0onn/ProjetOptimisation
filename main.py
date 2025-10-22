@@ -1,6 +1,6 @@
 import time
 from src.utils.generators.generatorGraph import generatorGraph
-from src.utils.generators.generatorObjects import generatorObjects
+from src.utils.generators.generatorInstance import generatorInstance
 
 # start = time.time()
 # graph = generatorGraph('graphe_50_villes.csv')
@@ -8,7 +8,4 @@ from src.utils.generators.generatorObjects import generatorObjects
 # print(graph)
 # print(end-start)
 
-print("Génération des objets...")
-datas = generatorObjects(10)
-print("Objets générés :")
-datas.printStock()
+generatorInstance('fixtures/graphs/graph_50.csv', 10)

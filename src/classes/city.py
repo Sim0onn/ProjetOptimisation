@@ -1,11 +1,11 @@
 from src.classes.warehouse import Warehouse
-from src.classes.client import Client
+from src.classes.customer import Customer
 
 class City():
     def __init__(self,name):
         self.name = name
         self.warehouses = []
-        self.clients = []
+        self.customers = []
     
     def getName(self):
         return self.name

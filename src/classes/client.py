@@ -1,7 +1,7 @@
 from src.classes.object import Object
 
 
-class Client(): 
+class Customers(): 
     def __init__(self,name):
         self.name = name
         self.objects = []

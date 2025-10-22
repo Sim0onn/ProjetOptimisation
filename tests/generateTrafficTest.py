@@ -4,7 +4,7 @@ from src.utils.utilsTraffic import generateTrafficGraphs
 def main():
     # Générer le graphe de base avec 20 villes
     print("Génération du graphe de base...")
-    base_graph = generatorGraph("fixtures/graph_20.csv")
+    base_graph = generatorGraph("fixtures/graphs/graph_20.csv")
     print("Graphe de base généré :")
     print(base_graph)
 

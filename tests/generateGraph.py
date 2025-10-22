@@ -1,7 +1,7 @@
 from src.utils.generators.generatorGraph import generatorGraph
 
 
-file = 'fixtures/graph_100.csv'
+file = 'fixtures/graphs/graph_100.csv'
 
 graph = generatorGraph(file)
 
