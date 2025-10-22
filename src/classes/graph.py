@@ -7,6 +7,8 @@ class Graph:
         self.cities = {}
         self.roads = []
 
+    def getCities(self):
+        return self.cities
 
     def addCity(self, city_name: str):
 
@@ -17,7 +19,7 @@ class Graph:
 
 
     def addRoad(self, city_name1: str, city_name2: str, distance: float = 1.0):
-
+    
         if city_name1 not in self.cities:
             self.addCity(city_name1)
         if city_name2 not in self.cities:
@@ -25,15 +27,10 @@ class Graph:
 
         start_city = self.cities[city_name1]
         end_city = self.cities[city_name2]
-
+        
         if not self.roadExists(start_city, end_city):
             road = Road(start_city, end_city, distance)
             self.roads.append(road)
-
-            reverse_road = Road(end_city, start_city, distance)
-            self.roads.append(reverse_road)
-        else:
-            print(f"La route entre {city_name1} et {city_name2} existe déjà.")
 
 
     def roadExists(self, start_city: City, end_city: City) -> bool:
@@ -74,7 +71,7 @@ class Graph:
     def getCityFromWarehouses(self, type, name):
         for city in self.cities.values():
             if city.getObjectFromWarehouses(type, name):
-                return city.getName()
+                return city
         return None
 
 
