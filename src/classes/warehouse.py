@@ -1,18 +1,21 @@
-from src.classes.stock import Stock
-
+from src.classes.object import Object
 class Warehouse():
 
     def __init__(self):
-        self.stock = Stock()
+        self.stock = []
         
     def getStock(self):
-        return self.stock.getStock()
+        return self.stock
     
-    def setStock(self,stock):
-        self.stock = stock
+    def printStock(self):
+        for obj in self.stock:
+            print(f"{obj.type} : {obj.name}")
     
     def addObject(self,type,name):
-        self.stock.addObject(type,name)
+        self.stock.append(Object(type,name))
     
     def getObject(self,type,name):
-        return self.stock.getObject(type,name)
+        for obj in self.stock:
+            if obj.type == type and obj.name == name:
+                return obj
+        return None
