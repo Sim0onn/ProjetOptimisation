@@ -1,6 +1,5 @@
 from src.utils.generators.generatorGraph import generatorGraph
 
-
 file = 'fixtures/graphs/graph_100.csv'
 
 graph = generatorGraph(file)
@@ -14,4 +13,4 @@ if graph and graph.getDegree() > 0:
     
     roads = graph.getAllRoads()
     for road in roads:
-        print(f"{road.getStartCity().name} -> {road.getEndCity().name} : {road.distance} km")
+        print(f"{road.getCity1().name} <-> {road.getCity2().name} : {road.distance} km")

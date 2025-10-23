@@ -1,16 +1,16 @@
 from src.classes.city import City
 
 class Road():
-    def __init__(self, start_city: City, end_city: City, distance: float):
-        self.start_city = start_city
-        self.end_city = end_city
+    def __init__(self, city1: City, city2: City, distance: float):
+        self.city1 = city1
+        self.city2 = city2
         self.distance = round(distance)
 
-    def getStartCity(self):
-        return self.start_city
+    def getCity1(self):
+        return self.city1
     
-    def getEndCity(self):
-        return self.end_city
+    def getCity2(self):
+        return self.city2
 
     def getDistance(self):
         return self.distance    

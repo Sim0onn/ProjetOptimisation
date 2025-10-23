@@ -43,8 +43,8 @@ def generateTrafficGraphs(base_graph):
 
 
         for road in base_graph.getAllRoads():
-            start_city = road.getStartCity().getName()
-            end_city = road.getEndCity().getName()
+            start_city = road.getCity1().getName()
+            end_city = road.getCity2().getName()
             distance = road.getDistance()
 
             congestionTraffic = random.uniform(congestionMin, congestionMax)
