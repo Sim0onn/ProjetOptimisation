@@ -25,15 +25,12 @@ class Graph:
         if city_name2 not in self.cities:
             self.addCity(city_name2)
 
-        start_city = self.cities[city_name1]
-        end_city = self.cities[city_name2]
+        city_name1 = self.cities[city_name1]
+        city_name2 = self.cities[city_name2]
         
-        if not self.roadExists(start_city, end_city):
-            road1 = Road(start_city, end_city, distance)
-            self.roads.append(road1)
-            
-            road2 = Road(end_city, start_city, distance)
-            self.roads.append(road2)
+        if not self.roadExists(city_name1, city_name2):
+            road = Road(city_name1, city_name2, distance)
+            self.roads.append(road)
 
 
     def roadExists(self, start_city: City, end_city: City) -> bool:
@@ -81,5 +78,5 @@ class Graph:
     def __repr__(self):
         repr_str = "Graph:\n"
         for road in self.roads:
-            repr_str += f"  {road.getStartCity().getName()} -> {road.getEndCity().getName()} ({road.getDistance()} km)\n"
+            repr_str += f"  {road.getCity1().getName()} <-> {road.getCity2().getName()} ({road.getDistance()} km)\n"
         return repr_str

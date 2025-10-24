@@ -13,6 +13,8 @@ def main():
 
     cleanFolder("objects", "*.csv")
     cleanFolder("customers", "*.csv")
+    cleanFolder("cities", "*.csv")
+    cleanFolder("graphs", "*.csv")
 
     for i in iterations:
         generateGraphsData(i,"graphs")
