@@ -20,7 +20,7 @@ def main():
         generateGraphsData(i,"graphs")
         generateCitiesData(i,"cities")
         nb = numberOfWarehouses(f'cities/cities_{i}.csv')
-        generateObjectsData(nb*nb_object_per_wh,"objects")
+        generateObjectsData(nb*nb_object_per_wh,"objects",i)
         duplicateFolder("objects", "customers")
         mixObjects("customers")
 

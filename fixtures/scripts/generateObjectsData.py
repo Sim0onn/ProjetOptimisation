@@ -2,9 +2,9 @@ import csv
 import random
 import os
 
-def generateObjectsData(item_count: int, output_directory: str):
+def generateObjectsData(item_count: int, output_directory: str, city_count: int):
 
-    file_name = f"{output_directory}_{item_count}.csv"
+    file_name = f"{output_directory}_{city_count}.csv"
     full_file_path = os.path.join(output_directory, file_name)
 
     #print(f"Génération du fichier '{full_file_path}'...")
