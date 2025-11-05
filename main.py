@@ -8,4 +8,4 @@ from src.utils.generators.generatorInstance import generatorInstance
 # print(graph)
 # print(end-start)
 
-generatorInstance('fixtures/graphs/graph_50.csv', 10)
+generatorInstance('fixtures/graphs/graph_10.csv',10)

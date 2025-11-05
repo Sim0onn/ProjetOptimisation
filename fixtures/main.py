@@ -1,10 +1,9 @@
 from scripts.generateCitiesData import *
 from scripts.generateGraphsData import *
-from scripts.mixObjects import *
 from scripts.numberOfWarehouses import *
 from scripts.generateObjectsData import *
 from scripts.cleanFolder import *
-from scripts.duplicateFolder import *
+
 
 def main():
     
@@ -21,8 +20,6 @@ def main():
         generateCitiesData(i,"cities")
         nb = numberOfWarehouses(f'cities/cities_{i}.csv')
         generateObjectsData(nb*nb_object_per_wh,"objects",i)
-        duplicateFolder("objects", "customers")
-        mixObjects("customers")
 
 if __name__ == "__main__":
     main()
