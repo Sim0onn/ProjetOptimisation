@@ -68,3 +68,12 @@ def generatorInstance(graph_file: str, nb_it: int):
         
         print(f"\n{'='*60}\n")
         print('-------------------------------------------------')
+
+    print("\n=== DISTANCES ENTRE LES VILLES ===")
+    for road in graph.getAllRoads():
+        city1 = road.getCity1().getName()
+        city2 = road.getCity2().getName()
+        distance = road.getDistance()
+        print(f"Distance entre {city1} et {city2} : {distance} km")
+
+    return graph
