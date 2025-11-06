@@ -7,10 +7,10 @@ from src.classes import Customer
 
 load_dotenv()
 SEED = int(os.getenv("SEED"))
-
+NB_INSTANCES = str(os.getenv("NB_INSTANCES"))
 random.seed(SEED)
 
-def generatorCustomers(nb_it,nb):
+def generatorCustomers(nb, nb_it=NB_INSTANCES):
     customer = Customer(f'client_{nb}')
 
     df = pd.read_csv(f'fixtures/objects/objects_{nb_it}.csv')

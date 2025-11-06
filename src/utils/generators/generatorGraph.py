@@ -1,8 +1,14 @@
 import csv
 from src.classes.graph import Graph
 
-def generatorGraph(path_file: str) -> Graph:
+import os 
+from dotenv import load_dotenv
+load_dotenv()
+NB_INSTANCES = str(os.getenv("NB_INSTANCES"))
 
+def generatorGraph(nb_it=NB_INSTANCES):
+
+    path_file = f"fixtures/graphs/graph_{nb_it}.csv"
     graph = Graph()
     
     print(f"Chargement du graphe depuis le fichier : '{path_file}'...")

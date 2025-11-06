@@ -2,12 +2,16 @@ from .generatorGraph import generatorGraph
 from .generatorWarehouse import generatorWarehouse
 from .generatorCustomers import generatorCustomers
 import pandas as pd
+import os 
+from dotenv import load_dotenv
+load_dotenv()
+NB_INSTANCES = str(os.getenv("NB_INSTANCES"))
 
-def generatorInstance(graph_file: str, nb_it: int):
+def generatorInstance(nb_it = NB_INSTANCES):
     cpt_customers = 0
     cpt_warehouses = 0
 
-    graph = generatorGraph(graph_file)
+    graph = generatorGraph(f'fixtures/graphs/graph_{nb_it}.csv')
     df = pd.read_csv(f'fixtures/cities/cities_{nb_it}.csv')
 
     print()
@@ -36,7 +40,7 @@ def generatorInstance(graph_file: str, nb_it: int):
         if nb_warehouses > 0:
             print(f"\n--- Création des entrepôts ---")
         for _ in range(nb_warehouses):
-            warehouse = generatorWarehouse(nb_it, cpt_warehouses)
+            warehouse = generatorWarehouse(cpt_warehouses, nb_it)
             graph.cities[city].addWarehouse(warehouse)
             cpt_warehouses += 10
 
@@ -45,7 +49,7 @@ def generatorInstance(graph_file: str, nb_it: int):
             print(f"\n--- Création des clients ---")
         for _ in range(nb_customers):
             cpt_customers+=1
-            customer = generatorCustomers(nb_it,cpt_customers)
+            customer = generatorCustomers(cpt_customers,nb_it)
             graph.cities[city].addCustomer(customer)
 
         # Affichage des entrepôts

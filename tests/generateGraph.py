@@ -1,8 +1,6 @@
 from src.utils.generators.generatorGraph import generatorGraph
 
-file = 'fixtures/graphs/graph_100.csv'
-
-graph = generatorGraph(file)
+graph = generatorGraph()
 
 if graph and graph.getDegree() > 0:
     print("\n--- Informations sur le graphe chargé ---")

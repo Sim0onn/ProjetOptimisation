@@ -1,7 +1,7 @@
 from src.utils.generators.generatorGraph import generatorGraph
 
 def main():
-    graph = generatorGraph(10)
+    graph = generatorGraph()
     object_type = "Food"
     object_name = "Milk"
     city_with_object = graph.getCityFromWarehouses(object_type, object_name)

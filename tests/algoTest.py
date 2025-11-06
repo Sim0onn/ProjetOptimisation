@@ -1,7 +1,6 @@
 from src.utils.generators.generatorInstance import generatorInstance
 
-#generatorInstance('fixtures/graphs/graph_10.csv',10)
-graph = generatorInstance('fixtures/graphs/graph_10.csv',10)
+graph = generatorInstance()
 
 pickup_cities = [...]   # villes où il faut collecter
 delivery_cities = [...] # villes où il faut livrer
