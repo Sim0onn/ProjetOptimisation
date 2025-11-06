@@ -1,15 +1,14 @@
 from .generatorGraph import generatorGraph
-from .generatorWarehouse import *
+from .generatorWarehouse import generatorWarehouse
+from .generatorCustomers import generatorCustomers
 import pandas as pd
 
 def generatorInstance(graph_file: str, nb_it: int):
-
+    cpt_customers = 0
     cpt_warehouses = 0
 
     graph = generatorGraph(graph_file)
-    objects_file = 'objects_' + graph_file.split('_')[-1]
-    print(objects_file)
-    df = pd.read_csv(f'fixtures/cities/cities_10.csv')
+    df = pd.read_csv(f'fixtures/cities/cities_{nb_it}.csv')
 
     print()
 
@@ -45,8 +44,9 @@ def generatorInstance(graph_file: str, nb_it: int):
         if nb_customers > 0:
             print(f"\n--- Création des clients ---")
         for _ in range(nb_customers):
-            customer = generatorCustomers(nb_it)
-            graph.cities[city].addWarehouse(customer)
+            cpt_customers+=1
+            customer = generatorCustomers(nb_it,cpt_customers)
+            graph.cities[city].addCustomer(customer)
 
         # Affichage des entrepôts
         if nb_warehouses > 0:
@@ -61,9 +61,9 @@ def generatorInstance(graph_file: str, nb_it: int):
         if nb_customers > 0:
             print(f"\nDEMANDES DES CLIENTS:")
             print(f"{'-'*30}")
-            for i, customer in enumerate(graph.cities[city].warehouses[nb_warehouses:]):
+            for i, customer in enumerate(graph.cities[city].customers[:nb_customers]):
                 print(f"Client #{i+1}:")
-                customer.printStock()
+                customer.printWishlist()
                 print(f"{'-'*30}")
         
         print(f"\n{'='*60}\n")

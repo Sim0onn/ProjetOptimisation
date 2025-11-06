@@ -23,6 +23,16 @@ class City():
         for ware in self.warehouses:
             return ware.getStock()
     
+    def addCustomer(self,customer):
+        self.customers.append(customer)
+    
+    def createWarehouse(self):
+        self.customers.append(Customer())
+
+    def returnCustomer(self):
+        for customer in self.customers:
+            return customer.getStock()
+        
     def numberOfWarehouses(self):
         return len(self.warehouses)
     
