@@ -11,7 +11,6 @@ def main():
     iterations = [10,20, 30, 50, 100, 200, 500, 1000, 2000]
 
     cleanFolder("objects", "*.csv")
-    cleanFolder("customers", "*.csv")
     cleanFolder("cities", "*.csv")
     cleanFolder("graphs", "*.csv")
 

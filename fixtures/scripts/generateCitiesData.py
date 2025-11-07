@@ -6,9 +6,7 @@ def generateCitiesData(city_count: int, output_directory: str):
     
     file_name = f"cities_{city_count}.csv"
     full_file_path = os.path.join(output_directory, file_name)
-    
-    #print(f"Génération du fichier '{full_file_path}'...")
-    
+
     try:
         with open(full_file_path, 'w', newline='', encoding='utf-8') as csv_file:
             writer = csv.writer(csv_file)
@@ -22,8 +20,6 @@ def generateCitiesData(city_count: int, output_directory: str):
                 num_customers = random.randint(0, 3)
 
                 writer.writerow([city_name, num_warehouses, num_customers])
-                
-        #print(f"-> Fichier '{full_file_path}' créé avec succès.")
 
     except IOError as e:
         print(f"ERREUR lors de la création du fichier '{full_file_path}': {e}")

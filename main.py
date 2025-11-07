@@ -1,6 +1,8 @@
 import time
 from src.utils.generators.generatorGraph import generatorGraph
 from src.utils.generators.generatorInstance import generatorInstance
+import os 
+from dotenv import load_dotenv
 
 # start = time.time()
 # graph = generatorGraph('graphe_50_villes.csv')
@@ -8,4 +10,7 @@ from src.utils.generators.generatorInstance import generatorInstance
 # print(graph)
 # print(end-start)
 
-generatorInstance('fixtures/graphs/graph_10.csv',10)
+load_dotenv()
+NB_INSTANCES = str(os.getenv("NB_INSTANCES"))
+
+generatorInstance(NB_INSTANCES)

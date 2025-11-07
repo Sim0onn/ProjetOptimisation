@@ -1,9 +1,9 @@
 from src.utils.generators.generatorGraph import generatorGraph
 
 def main():
-    graph = generatorGraph(10)
-    object_type = "Food"
-    object_name = "Milk"
+    graph = generatorGraph()
+    object_type = "Corrosive"
+    object_name = "Object_00004"
     city_with_object = graph.getCityFromWarehouses(object_type, object_name)
 
     if city_with_object:

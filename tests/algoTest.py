@@ -2,6 +2,7 @@ from math import inf
 from src.utils.generators.generatorInstance import generatorInstance
 
 graph = generatorInstance('fixtures/graphs/graph_10.csv', 10)
+
 nb_trucks = 3
 
 
@@ -20,6 +21,7 @@ def build_distance_matrix(graph):
         if d < dist[c1].get(c2, inf):
             dist[c1][c2] = d
             dist[c2][c1] = d
+
     return dist
 
 
@@ -68,7 +70,6 @@ def extract_delivery_data(graph):
     for city_name, city_obj in graph.getCities().items():
         if not getattr(city_obj, "customers", []):
             continue
-
         for customer in city_obj.customers:
             customer_name = getattr(customer, "name", "?")
             demanded_objs = getattr(customer, "objects", [])

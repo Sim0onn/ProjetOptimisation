@@ -1,7 +1,11 @@
 from src.classes import Warehouse
 import pandas as pd
+import os 
+from dotenv import load_dotenv
+load_dotenv()
+NB_INSTANCES = str(os.getenv("NB_INSTANCES"))
 
-def generatorWarehouse(nb_it, start):
+def generatorWarehouse(start=0, nb_it = NB_INSTANCES):
     warehouse = Warehouse()
 
     df = pd.read_csv(f'fixtures/objects/objects_{nb_it}.csv')

@@ -1,15 +1,18 @@
 from src.classes.graph import Graph
 import random
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-vitesseBase = 90
-consoBase = 0.33
+VITESSE_BASE = float(os.getenv("VITESSE_BASE", 90))
+CONSO_BASE = float(os.getenv("CONSO_BASE", 0.33))
 
-coeffFluide = 1
-coeffModere = 1.15
-coeffLourd = 1.3
+COEFF_FLUIDE = float(os.getenv("COEFF_FLUIDE", 1))
+COEFF_MODERE = float(os.getenv("COEFF_MODERE", 1.15))
+COEFF_LOURD = float(os.getenv("COEFF_LOURD", 1.3))
 
-importanceTemps = 0.4
-importanceConso = 0.6
+IMPORTANCE_TEMPS = float(os.getenv("IMPORTANCE_TEMPS", 0.4))
+IMPORTANCE_CONSO = float(os.getenv("IMPORTANCE_CONSO", 0.6))
 
 def generateTrafficGraphs(base_graph):
     trafficGraphs = []
@@ -49,16 +52,16 @@ def generateTrafficGraphs(base_graph):
 
             congestionTraffic = random.uniform(congestionMin, congestionMax)
 
-            tempsTrajet = (distance / vitesseBase) * congestionTraffic
+            tempsTrajet = (distance / VITESSE_BASE) * congestionTraffic
 
             if congestionTraffic < 1.2:
-                consoTrajet = distance * consoBase * coeffFluide * congestionTraffic
+                consoTrajet = distance * CONSO_BASE * COEFF_FLUIDE * congestionTraffic
             elif congestionTraffic < 1.4:
-                consoTrajet = distance * consoBase * coeffModere * congestionTraffic
+                consoTrajet = distance * CONSO_BASE * COEFF_MODERE * congestionTraffic
             else:
-                consoTrajet = distance * consoBase * coeffLourd * congestionTraffic
+                consoTrajet = distance * CONSO_BASE * COEFF_LOURD * congestionTraffic
 
-            nouveauPoids = (importanceTemps * tempsTrajet) + (importanceConso * consoTrajet)
+            nouveauPoids = (IMPORTANCE_TEMPS * tempsTrajet) + (IMPORTANCE_CONSO * consoTrajet)
 
             trafficGraph.addCity(start_city)
             trafficGraph.addCity(end_city)
