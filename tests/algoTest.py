@@ -3,7 +3,7 @@ from src.utils.generators.generatorInstance import generatorInstance
 
 graph = generatorInstance()
 
-nb_trucks = 3
+nb_trucks = 200
 
 
 def build_distance_matrix(graph):
@@ -161,7 +161,16 @@ def choose_start_and_end(pickups, deliveries):
     end_city = deliveries[0][0]  # ville du premier client
     return start_city, end_city
 
-
+def assign_clients_to_trucks(deliveries, nb_trucks):
+    """
+    Répartit les clients sur les camions de manière simple (round-robin).
+    Retourne un dict : {truck_id: [clients]}
+    """
+    trucks = {i: [] for i in range(nb_trucks)}
+    for idx, client in enumerate(deliveries):
+        truck_id = idx % nb_trucks
+        trucks[truck_id].append(client)
+    return trucks
 
 
 
@@ -183,31 +192,60 @@ pickup_cities, deliveries, mapping = extract_delivery_data(graph)
 if not pickup_cities or not deliveries:
     raise ValueError("Aucune donnée de livraison disponible.")
 
-# Sélection d’un couple dépôt ↔ client logique
-start_city, end_city = choose_start_and_end(pickup_cities, deliveries)
-client_name = deliveries[0][1]
-demanded_objs = deliveries[0][2]
-relevant_pickups = mapping[client_name]  # villes où le client peut prendre ses objets
+# Répartir les clients sur les camions
+def assign_clients_to_trucks(deliveries, nb_trucks):
+    trucks = {i: [] for i in range(nb_trucks)}
+    for idx, client in enumerate(deliveries):
+        truck_id = idx % nb_trucks
+        trucks[truck_id].append(client)
+    return trucks
+
+trucks_clients = assign_clients_to_trucks(deliveries, nb_trucks)
+
+# Calculer la route pour chaque camion
+for truck_id, clients in trucks_clients.items():
+    print(f"\n=== CAMION {truck_id} ===")
+    truck_route_nodes = []
+    truck_full_route = []
+    truck_total_distance = 0.0
+
+    # conserver le dépôt initial du camion pour le retour
+    start_city_initial = mapping[clients[0][1]][0]  # premier dépôt du premier client
+
+    last_position = start_city_initial  # position actuelle du camion
+
+    for client_data in clients:
+        end_city, client_name, demanded_objs = client_data
+        relevant_pickups = mapping[client_name]
+
+        # Départ depuis la dernière position du camion
+        start_city = last_position
+
+        # 1) calculer l'ordre sur les key nodes (dépôts + client)
+        order_nodes = greedy_on_key_nodes(start_city, relevant_pickups, end_city, shortest_dist)
+
+        # 2) déployer la route complète (avec intermédiaires si nécessaires)
+        full_route, total_distance = expand_order_to_full_route(order_nodes, nxt, shortest_dist)
+
+        # mettre à jour la dernière position du camion
+        last_position = full_route[-1] if full_route else start_city
+
+        # accumuler pour le camion
+        truck_route_nodes.extend(order_nodes)
+        truck_full_route.extend(full_route if not truck_full_route else full_route[1:])  # éviter duplication
+        truck_total_distance += total_distance
+
+    # Ajouter le retour au dépôt initial si ce n’est pas déjà la dernière ville
+    if last_position != start_city_initial:
+        order_nodes_return = greedy_on_key_nodes(last_position, [], start_city_initial, shortest_dist)
+        full_route_return, total_distance_return = expand_order_to_full_route(order_nodes_return, nxt, shortest_dist)
+        truck_route_nodes.extend(order_nodes_return[1:])  # éviter duplication
+        truck_full_route.extend(full_route_return[1:])
+        truck_total_distance += total_distance_return
+
+    # Affichage du résultat pour le camion
+    print(" -> ".join(truck_route_nodes))
+    print(" -> ".join(truck_full_route))
+    print(f"Distance totale estimée pour camion {truck_id} : {truck_total_distance:.2f} km")
 
 
-print(f"\n=== PLAN CLIENT ===")
-print(f"Départ depuis le dépôt : {start_city}")
-print(f"Livraison pour le client : {client_name}")
-print(f"Ville du client : {end_city}")
-print(f"Objets demandés : {[f'{o.type}:{o.name}' for o in demanded_objs]}")
-print(f"Provenance possible : {mapping[client_name]}")
-
-delivery_cities = [end_city]
-
-
-# 1) calculer l'ordre sur les nœuds d'intérêt (pickups + livraison finale)
-order_nodes = greedy_on_key_nodes(start_city, relevant_pickups, end_city, shortest_dist)
-
-# 2) déployer en route réelle (avec intermédiaires)
-full_route, total_distance = expand_order_to_full_route(order_nodes, nxt, shortest_dist)
-
-print("\n=== ORDER (key nodes) ===")
-print(" -> ".join(order_nodes))
-print("\n=== ROUTE COMPLETE ===")
-print(" -> ".join(full_route))
-print(f"Distance totale estimée : {total_distance:.2f} km")
