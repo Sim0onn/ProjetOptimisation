@@ -2,22 +2,22 @@ import csv
 import random
 import os
 
-def generateGraphsData(city_count: int, output_directory: str):
+def generateGraphsData(nb_it: int):
 
-    file_name = f"graph_{city_count}.csv"
-    full_file_path = os.path.join(output_directory, file_name)
+    file_name = f"graph_{nb_it}.csv"
+    full_file_path = os.path.join("graphs", file_name)
 
     # Génération des noms de villes
-    cities = [f"Ville_{i:04d}" for i in range(1, city_count + 1)]
+    cities = [f"Ville_{i:04d}" for i in range(1, nb_it + 1)]
     random.shuffle(cities)
     
     data_rows = []
     existing_edges = set()
 
     # Création d'un cycle de base pour assurer la connexité
-    for i in range(city_count):
+    for i in range(nb_it):
         start_city = cities[i]
-        end_city = cities[(i + 1) % city_count]
+        end_city = cities[(i + 1) % nb_it]
         distance = random.randint(50, 3000)
         
         # Arête non orientée : stockée sous forme triée
@@ -28,7 +28,7 @@ def generateGraphsData(city_count: int, output_directory: str):
             existing_edges.add(edge)
 
     # Ajout d'arêtes supplémentaires (~1.5 * city_count)
-    num_edges_to_add = int(city_count * 1.5)
+    num_edges_to_add = int(nb_it * 1.5)
     added_edges_count = 0
     max_attempts = num_edges_to_add * 5
 
