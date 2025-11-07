@@ -11,7 +11,7 @@ def generatorInstance(nb_it = NB_INSTANCES):
     cpt_customers = 0
     cpt_warehouses = 0
 
-    graph = generatorGraph(f'fixtures/graphs/graph_{nb_it}.csv')
+    graph = generatorGraph()
     df = pd.read_csv(f'fixtures/cities/cities_{nb_it}.csv')
 
     print()

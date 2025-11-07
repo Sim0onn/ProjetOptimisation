@@ -1,7 +1,7 @@
 from math import inf
 from src.utils.generators.generatorInstance import generatorInstance
 
-graph = generatorInstance('fixtures/graphs/graph_10.csv', 10)
+graph = generatorInstance()
 
 nb_trucks = 3
 
@@ -88,35 +88,39 @@ def extract_delivery_data(graph):
 
 
 
-def greedy_on_key_nodes(start, pickups, deliveries, shortest_dist):
+def greedy_on_key_nodes(start, pickups, end_city, shortest_dist):
     """
-    Heuristique gloutonne sur le graphe contracté des 'key nodes' en utilisant shortest_dist.
-    Retourne une liste ordonnée de key nodes (p.ex. [start, p1, p2, ..., delivery]).
+    Heuristique gloutonne sur le graphe contracté des 'key nodes' :
+    - start : ville de départ (dépôt)
+    - pickups : villes à visiter pour récupérer les objets
+    - end_city : ville du client
     """
-    key_nodes = [start] + list(set(pickups) | set(deliveries))
+    # Key nodes = dépôt + pickups + client final
+    key_nodes = [start] + list(pickups) + [end_city]
+
     current = start
-    remaining = set(pickups) | set(deliveries)
+    remaining = set(pickups)  # on ne visite que les pickups avant le client
     order = [start]
 
     while remaining:
-        # ne garder que les candidats atteignables (distance finie)
         candidates = [c for c in remaining if shortest_dist[current].get(c, inf) < inf]
         if not candidates:
-            print(f"⚠️ Aucune ville d'intérêt atteignable depuis {current} (sur key_nodes). Arrêt.")
+            print(f"⚠️ Aucune ville de pickup atteignable depuis {current}. Arrêt.")
             break
         next_node = min(candidates, key=lambda c: shortest_dist[current][c])
         order.append(next_node)
         remaining.discard(next_node)
         current = next_node
 
-    # s'assurer que la livraison finale est dans l'ordre (si elle était dans deliveries)
-    for d in deliveries:
-        if d not in order:
-            if shortest_dist[current].get(d, inf) < inf:
-                order.append(d)
-            else:
-                print(f"⚠️ Impossible d'ajouter la livraison finale {d} depuis {current} (inatteignable).")
+    # ajouter enfin la ville du client
+    if shortest_dist[current].get(end_city, inf) < inf:
+        order.append(end_city)
+    else:
+        print(f"⚠️ Impossible d’ajouter le client final {end_city} depuis {current}.")
+
     return order
+
+
 
 
 def expand_order_to_full_route(order, nxt, shortest_dist):
@@ -183,6 +187,8 @@ if not pickup_cities or not deliveries:
 start_city, end_city = choose_start_and_end(pickup_cities, deliveries)
 client_name = deliveries[0][1]
 demanded_objs = deliveries[0][2]
+relevant_pickups = mapping[client_name]  # villes où le client peut prendre ses objets
+
 
 print(f"\n=== PLAN CLIENT ===")
 print(f"Départ depuis le dépôt : {start_city}")
@@ -194,8 +200,8 @@ print(f"Provenance possible : {mapping[client_name]}")
 delivery_cities = [end_city]
 
 
-# 1) calculer l'ordre sur les nœuds d'intérêt (pickups + delivery) via shortest_dist
-order_nodes = greedy_on_key_nodes(start_city, pickup_cities, delivery_cities, shortest_dist)
+# 1) calculer l'ordre sur les nœuds d'intérêt (pickups + livraison finale)
+order_nodes = greedy_on_key_nodes(start_city, relevant_pickups, end_city, shortest_dist)
 
 # 2) déployer en route réelle (avec intermédiaires)
 full_route, total_distance = expand_order_to_full_route(order_nodes, nxt, shortest_dist)
