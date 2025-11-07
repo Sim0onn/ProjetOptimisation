@@ -73,6 +73,47 @@ class Graph:
             if city.getObjectFromWarehouses(type, name):
                 return city
         return None
+    
+
+    def getWeight(self, city1_name, city2_name):
+        """
+        Renvoie le poids (distance ou coût) entre deux villes si la route existe.
+        Retourne float('inf') si aucune route ne les relie.
+        """
+        city1 = self.getCity(city1_name)
+        city2 = self.getCity(city2_name)
+        if not city1 or not city2:
+            return float('inf')
+
+        # Vérifie s’il existe une route directe entre les deux villes
+        for road in self.getAllRoads():
+            c1 = road.getCity1().getName()
+            c2 = road.getCity2().getName()
+            if (c1 == city1_name and c2 == city2_name) or (c1 == city2_name and c2 == city1_name):
+                return road.getDistance()
+
+        return float('inf')
+    
+
+    def getRoad(self, city1_name, city2_name):
+        """
+        Renvoie la route (objet Road) reliant deux villes, si elle existe.
+        Retourne None si aucune route ne les relie.
+        """
+        city1 = self.getCity(city1_name)
+        city2 = self.getCity(city2_name)
+        if not city1 or not city2:
+            return None
+
+        for road in self.getAllRoads():
+            c1 = road.getCity1().getName()
+            c2 = road.getCity2().getName()
+            if (c1 == city1_name and c2 == city2_name) or (c1 == city2_name and c2 == city1_name):
+                return road
+
+        return None
+
+
 
 
     def __repr__(self):
