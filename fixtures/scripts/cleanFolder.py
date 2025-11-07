@@ -13,8 +13,6 @@ def cleanFolder(directory_path: str, file_pattern: str):
     if not files_to_delete:
         print(f"Le dossier '{directory_path}' est déjà vide (aucun fichier '{file_pattern}' trouvé).")
         return
-
-    #print(f"Nettoyage de {len(files_to_delete)} fichier(s) dans le dossier '{directory_path}'...")
     
     for file_path in files_to_delete:
         try:
