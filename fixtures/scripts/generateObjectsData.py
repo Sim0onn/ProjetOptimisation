@@ -7,8 +7,6 @@ def generateObjectsData(item_count: int, output_directory: str, city_count: int)
     file_name = f"{output_directory}_{city_count}.csv"
     full_file_path = os.path.join(output_directory, file_name)
 
-    #print(f"Génération du fichier '{full_file_path}'...")
-
     categories = [
         "Unspecified", "Food", "Flammable", "Explosive", "Toxic",
         "Radioactive", "Corrosive", "Oxidizing", "Pressurized", "Fragile"
@@ -27,8 +25,6 @@ def generateObjectsData(item_count: int, output_directory: str, city_count: int)
             writer = csv.writer(csv_file)
             writer.writerow(['Category', 'Object'])  
             writer.writerows(data_rows)    
-                
-        #print(f"-> Fichier '{full_file_path}' créé avec succès.")
-
+            
     except IOError as e:
         print(f"ERREUR lors de la création du fichier '{full_file_path}': {e}")

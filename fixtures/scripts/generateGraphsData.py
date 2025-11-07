@@ -6,9 +6,7 @@ def generateGraphsData(city_count: int, output_directory: str):
 
     file_name = f"graph_{city_count}.csv"
     full_file_path = os.path.join(output_directory, file_name)
-    
-    #print(f"Génération du fichier '{full_file_path}'...")
-    
+
     cities = [f"Ville_{i:04d}" for i in range(1, city_count + 1)]
     random.shuffle(cities)  
     
@@ -48,8 +46,6 @@ def generateGraphsData(city_count: int, output_directory: str):
             writer = csv.writer(csv_file)
             writer.writerow(['Start_city', 'End_city', 'Distance'])
             writer.writerows(data_rows)
-            
-        #print(f"-> Fichier '{full_file_path}' créé avec succès avec {len(data_rows)} routes.")
 
     except IOError as e:
         print(f"ERREUR lors de la création du fichier '{full_file_path}': {e}")

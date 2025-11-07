@@ -2,9 +2,9 @@ from src.utils.generators.generatorInstance import generatorInstance
 
 graph = generatorInstance()
 
-pickup_cities = [...]   # villes où il faut collecter
-delivery_cities = [...] # villes où il faut livrer
-end_city = "city_X"     # ville finale
+pickup_cities = [...] 
+delivery_cities = [...] 
+end_city = "city_X"     
 nb_trucks = 3
 
 
@@ -19,7 +19,7 @@ def build_distance_matrix(graph):
         c2 = road.getCity2().getName()
         d = road.getDistance()
         dist[c1][c2] = d
-        dist[c2][c1] = d  # graphe non orienté
+        dist[c2][c1] = d 
     return dist
 
 def extract_delivery_data(graph):
@@ -27,7 +27,6 @@ def extract_delivery_data(graph):
     end_city = None
 
     for city_name, city_obj in graph.getCities().items():
-        # Vérifier s'il y a des clients
         if not city_obj.customers:
             continue
 
