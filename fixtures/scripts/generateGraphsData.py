@@ -49,7 +49,7 @@ def generateGraphsData(city_count: int, output_directory: str):
     try:
         with open(full_file_path, 'w', newline='', encoding='utf-8') as csv_file:
             writer = csv.writer(csv_file)
-            writer.writerow(['City_1', 'City_2', 'Distance'])
+            writer.writerow(['Start_city', 'End_city', 'Distance'])
             writer.writerows(data_rows)
     except IOError as e:
         print(f"ERREUR lors de la création du fichier '{full_file_path}': {e}")
