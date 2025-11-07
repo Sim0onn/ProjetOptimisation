@@ -3,7 +3,7 @@ from src.utils.generators.generatorInstance import generatorInstance
 
 graph = generatorInstance()
 
-nb_trucks = 1
+nb_trucks = 10
 
 
 def build_distance_matrix(graph):
