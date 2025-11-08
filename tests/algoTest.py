@@ -3,7 +3,7 @@ from src.utils.generators.generatorInstance import generatorInstance
 
 graph = generatorInstance()
 
-nb_trucks = 2
+nb_trucks = 3
 
 
 
@@ -186,12 +186,26 @@ def assign_clients_to_trucks(deliveries, nb_trucks):
 
 # -------------------- Exécution --------------------
 
+
+
+
 dist = build_distance_matrix(graph)
 shortest_dist, nxt = floyd_warshall_with_next(dist)
 
 pickup_cities, deliveries, mapping = extract_delivery_data(graph)
 if not pickup_cities or not deliveries:
     raise ValueError("Aucune donnée de livraison disponible.")
+
+for city_name, city_obj in graph.getCities().items():
+    for customer in getattr(city_obj, "customers", []):
+        if not customer.objects:
+            continue
+        name = customer.name
+        if not mapping.get(name):
+            print(f"⚠️ Client {name} à {city_name} demande des objets non disponibles dans aucun dépôt.")
+            print("Objets demandés :", [(obj.type, obj.name) for obj in customer.objects])
+
+
 
 # Répartir les clients sur les camions
 def assign_clients_to_trucks(deliveries, nb_trucks):
@@ -211,7 +225,11 @@ for truck_id, clients in trucks_clients.items():
     truck_total_distance = 0.0
 
     # conserver le dépôt initial du camion pour le retour
-    start_city_initial = mapping[clients[0][1]][0]  # premier dépôt du premier client
+    # Vérifier que le premier client du camion a bien des dépôts associés
+    first_client_name = clients[0][1]
+    if not mapping[first_client_name]:
+        raise ValueError(f"Le client '{first_client_name}' n'a aucun dépôt associé dans mapping.")
+    start_city_initial = mapping[first_client_name][0]
 
     last_position = start_city_initial  # position actuelle du camion
 
