@@ -4,13 +4,15 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 SEED = int(os.getenv("SEED", 42))
+OBJ_PER_WH = int(os.getenv("OBJ_PER_WH"))
+
 
 def generateObjectsData(warehouse_count: int, nb_it: int):
+    print(warehouse_count)
+    random.seed(SEED)
 
-    random.seed(SEED)  
-
-    file_name = f"objects_{nb_it}.csv"
-    full_file_path = os.path.join("objects", file_name)
+    filename = f"objects_{nb_it}.csv"
+    full_file_path = os.path.join("objects", filename)
 
     os.makedirs("objects", exist_ok=True)
 
@@ -24,10 +26,10 @@ def generateObjectsData(warehouse_count: int, nb_it: int):
 
     for w in range(warehouse_count):
         # Choisir un type aléatoire pour le warehouse
-        chosen_category = random.choice(categories)
-        for _ in range(10):
-            object_name = f"Object_{obj_counter:05d}"
-            data_rows.append([chosen_category, object_name])
+        chosencategory = random.choice(categories)
+        for  _ in range(OBJ_PER_WH):
+            objectname = f"Object{obj_counter:05d}"
+            data_rows.append([chosencategory, objectname])
             obj_counter += 1
 
     # Mélanger éventuellement les lignes entre warehouses si tu veux

@@ -24,7 +24,6 @@ def numberOfWarehouses(chemin_fichier: str) -> int:
                 except (ValueError, TypeError):
                     print(f"AVERTISSEMENT : Ligne ignorée car la valeur n'est pas un nombre valide : {ligne}")
                     continue
-                    
         return total_warehouses
 
     except Exception as e:

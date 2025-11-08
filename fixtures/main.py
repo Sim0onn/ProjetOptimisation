@@ -3,11 +3,6 @@ from scripts.generateGraphsData import *
 from scripts.numberOfWarehouses import *
 from scripts.generateObjectsData import *
 from scripts.cleanFolder import *
-import os 
-from dotenv import load_dotenv
-
-load_dotenv()
-OBJ_PER_WH = str(os.getenv("OBJ_PER_WH"))
 
 def main():
     
@@ -18,10 +13,10 @@ def main():
     cleanFolder("graphs", "*.csv")
 
     for i in iterations:
-        generateGraphsData(i,"graphs")
-        generateCitiesData(i,"cities")
+        generateGraphsData(i)
+        generateCitiesData(i)
         nb = numberOfWarehouses(f'cities/cities_{i}.csv')
-        generateObjectsData(nb*OBJ_PER_WH,i)
+        generateObjectsData(nb,i)
 
 if __name__ == "__main__":
     main()

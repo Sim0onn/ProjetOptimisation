@@ -7,6 +7,7 @@ nb_trucks = 3
 
 
 
+
 def build_distance_matrix(graph):
     """Matrice initiale : inf quand pas d'arête directe, 0 sur la diagonale."""
     cities = list(graph.getCities().keys())
