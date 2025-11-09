@@ -3,7 +3,7 @@ from src.utils.generators.generatorInstance import generatorInstance
 
 graph = generatorInstance()
 
-nb_trucks = 3
+nb_trucks = 10
 
 
 
@@ -264,8 +264,8 @@ for truck_id, clients in trucks_clients.items():
         truck_total_distance += total_distance_return
 
     # Affichage du résultat pour le camion
-    print(" -> ".join(truck_route_nodes))
-    print(" -> ".join(truck_full_route))
+    # print(" -> ".join(truck_route_nodes))
+    # print(" -> ".join(truck_full_route))
     print(f"Distance totale estimée pour camion {truck_id} : {truck_total_distance:.2f} km")
 
 
