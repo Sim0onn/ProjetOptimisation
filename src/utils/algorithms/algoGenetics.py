@@ -1,11 +1,12 @@
 import random
+from src.utils.commands import *
 from math import inf
 from typing import List, Tuple
 from src.utils.generators.generatorInstance import generatorInstance
 
 # ----------------- paramètres globaux -----------------
-NB_TRUCKS = 10
-RANDOM_SEED = 4
+NB_TRUCKS = 1
+RANDOM_SEED = loadVar("SEED2",int)
 random.seed(RANDOM_SEED)
 
 # GA paramétrage amélioré
@@ -210,7 +211,7 @@ def assign_clients_to_trucks(deliveries, nb_trucks):
     return trucks
 
 # ----------------- exécution principale -----------------
-def main():
+def algoGenetics():
     graph = generatorInstance()
     dist = build_distance_matrix(graph)
     shortest_dist, nxt = floyd_warshall_with_next(dist)
@@ -243,6 +244,3 @@ def main():
             full_back, dist_back = expand_order_to_full_route(back_order, nxt, shortest_dist)
             truck_total_distance += dist_back
         print(f"Distance totale estimée pour camion {truck_id} : {truck_total_distance:.2f} km")
-
-if __name__=="__main__":
-    main()

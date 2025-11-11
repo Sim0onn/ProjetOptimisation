@@ -2,14 +2,12 @@ import random
 from src.utils.commands import *
 from math import inf
 from src.utils.generators.generatorInstance import generatorInstance
-import os 
 
 # -------- Paramètres --------
-
 NB_TRUCKS = 1
 TABU_MAX_ITER = 100
 TABU_TENURE = 10
-RANDOM_SEED = loadVar("SEED2","int")
+RANDOM_SEED = loadVar("SEED2",int)
 
 random.seed(RANDOM_SEED)
 
@@ -199,7 +197,7 @@ def assign_clients_to_trucks(deliveries, nb_trucks):
 
 
 # -------- Exécution principale --------
-def main():
+def algoTaboo():
     # génération de l'instance
     graph = generatorInstance()
     # matrice et plus courts chemins
@@ -303,6 +301,3 @@ def main():
         # print(" -> ".join(truck_full_route) if truck_full_route else "(aucune)")
         print(f"Distance totale estimée pour camion {truck_id} : {truck_total_distance:.2f} km")
 
-
-if __name__ == "__main__":
-    main()
