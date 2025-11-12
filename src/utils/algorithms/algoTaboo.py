@@ -300,4 +300,5 @@ def algoTaboo():
         # print("Route complète parcourue :")
         # print(" -> ".join(truck_full_route) if truck_full_route else "(aucune)")
         print(f"Distance totale estimée pour camion {truck_id} : {truck_total_distance:.2f} km")
+        return truck_total_distance, truck_full_route
 
