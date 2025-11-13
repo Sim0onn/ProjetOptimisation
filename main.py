@@ -1,42 +1,66 @@
 import time
-from src.utils.generators.generatorGraph import generatorGraph
-from src.utils.generators.generatorInstance import generatorInstance
-import os 
-from dotenv import load_dotenv
-from src.utils.algorithms.algoTaboo import algoTaboo
+import matplotlib.pyplot as plt
+import pandas as pd
+from src.utils.commands import update_env_seed
 from src.utils.algorithms.algoGenetics import algoGenetics
+from src.utils.algorithms.algoTaboo import algoTaboo
 
-def update_env_seed(seed, path=".env"):
-    lines = []
-    seed_set = False
+def run_executions(nb):
+    results = []
 
-    # Lire le .env si il existe
-    if os.path.exists(path):
-        with open(path, "r") as f:
-            for line in f:
-                if line.startswith("SEED2="):
-                    lines.append(f"SEED2={seed}\n")
-                    seed_set = True
-                else:
-                    lines.append(line)
+    for i in range(nb):
+        print(f"----------------------- itération {i} -----------------------")
+        update_env_seed(i)
 
-    # Si aucune ligne SEED= existait → on l'ajoute
-    if not seed_set:
-        lines.append(f"SEED2={seed}\n")
+        # --- Tabou ---
+        start = time.time()
+        taboo_distance, taboo_route = algoTaboo()
+        taboo_time = time.time() - start
+        print(f"Tabou → {taboo_distance:.2f} km en {taboo_time:.2f}s")
 
-    # Réécrire proprement
-    with open(path, "w") as f:
-        f.writelines(lines)
+        results.append({
+            "iteration": i,
+            "algo": "Tabou",
+            "distance": taboo_distance,
+            "time": taboo_time
+        })
 
-for i in range(20):
-    print(f"-----------------------ittérations-{i}-----------------------")
-    update_env_seed(i)
-    start = time.time()
-    algoTaboo()
-    end = time.time()
-    print(end-start)
-    start = time.time()
-    algoGenetics()
-    end = time.time()
-    print(end-start)
-    
+        # --- Génétique ---
+        start = time.time()
+        genetics_distance, genetics_route = algoGenetics()
+        genetics_time = time.time() - start
+        print(f"Génétique → {genetics_distance:.2f} km en {genetics_time:.2f}s")
+
+        results.append({
+            "iteration": i,
+            "algo": "Génétique",
+            "distance": genetics_distance,
+            "time": genetics_time
+        })
+
+    df = pd.DataFrame(results)
+    return df
+
+
+# --- Exécution ---
+df_results = run_executions(20)
+
+# Résumé statistique directement affiché
+print("\n--- Statistiques globales ---")
+print(df_results.groupby("algo")[["distance", "time"]].agg(["mean", "std", "min", "max"]))
+
+# --- Graphiques ---
+plt.figure(figsize=(6,4))
+df_results.boxplot(column="distance", by="algo")
+plt.title("Distribution des distances par algorithme")
+plt.suptitle("")
+plt.ylabel("Distance (km)")
+plt.show()
+
+plt.figure(figsize=(6,4))
+df_results.boxplot(column="time", by="algo")
+plt.title("Distribution des temps d'exécution par algorithme")
+plt.suptitle("")
+plt.ylabel("Temps (s)")
+plt.show()
+

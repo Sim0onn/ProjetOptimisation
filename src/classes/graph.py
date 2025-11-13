@@ -66,13 +66,6 @@ class Graph:
 
     def getDegreeNode(self, city_name: str):
         return len(self.getRoadsFrom(city_name))
-
-
-    def getCityFromWarehouses(self, type, name):
-        for city in self.cities.values():
-            if city.getObjectFromWarehouses(type, name):
-                return city
-        return None
     
 
     def getWeight(self, city1_name, city2_name):

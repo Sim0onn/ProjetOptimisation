@@ -26,7 +26,7 @@ class City():
     def addCustomer(self,customer):
         self.customers.append(customer)
     
-    def createWarehouse(self):
+    def createCustomer(self):
         self.customers.append(Customer())
 
     def returnCustomer(self):
@@ -35,10 +35,3 @@ class City():
         
     def numberOfWarehouses(self):
         return len(self.warehouses)
-    
-    def getObjectFromWarehouses(self,type,name):
-        for ware in self.warehouses:
-            obj = ware.getObject(type,name)
-            if obj is not None:
-                return True
-        return None

@@ -4,7 +4,7 @@ from math import inf
 from src.utils.generators.generatorInstance import generatorInstance
 
 # -------- Paramètres --------
-NB_TRUCKS = 1
+NB_TRUCKS = 1000
 TABU_MAX_ITER = 100
 TABU_TENURE = 10
 RANDOM_SEED = loadVar("SEED2",int)

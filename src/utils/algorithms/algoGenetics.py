@@ -5,7 +5,7 @@ from typing import List, Tuple
 from src.utils.generators.generatorInstance import generatorInstance
 
 # ----------------- paramètres globaux -----------------
-NB_TRUCKS = 1
+NB_TRUCKS = 1000
 RANDOM_SEED = loadVar("SEED2",int)
 random.seed(RANDOM_SEED)
 
