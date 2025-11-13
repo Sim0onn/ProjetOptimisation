@@ -7,7 +7,7 @@ pip install pandas
 
 
 
-L'algoTest utilise la MH Floyd-Marshall
+L'algoTest utilise la MH Floyd-Warshall
 
 
 
