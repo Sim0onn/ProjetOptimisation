@@ -43,24 +43,25 @@ def run_executions(nb):
 
 
 # --- Exécution ---
-df_results = run_executions(20)
+df_results = run_executions(10)
 
 # Résumé statistique directement affiché
 print("\n--- Statistiques globales ---")
 print(df_results.groupby("algo")[["distance", "time"]].agg(["mean", "std", "min", "max"]))
 
 # --- Graphiques ---
-plt.figure(figsize=(6,4))
-df_results.boxplot(column="distance", by="algo")
-plt.title("Distribution des distances par algorithme")
+fig, ax = plt.subplots(figsize=(6,4))
+df_results.boxplot(column="distance", by="algo", ax=ax)
+ax.set_title("Distribution des distances par algorithme")
 plt.suptitle("")
-plt.ylabel("Distance (km)")
+ax.set_ylabel("Distance (km)")
 plt.show()
 
-plt.figure(figsize=(6,4))
-df_results.boxplot(column="time", by="algo")
-plt.title("Distribution des temps d'exécution par algorithme")
+
+fig, ax = plt.subplots(figsize=(6,4))
+df_results.boxplot(column="time", by="algo", ax=ax)
+ax.set_title("Distribution des temps d'exécution par algorithme")
 plt.suptitle("")
-plt.ylabel("Temps (s)")
+ax.set_ylabel("Temps (s)")
 plt.show()
 

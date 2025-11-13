@@ -5,7 +5,7 @@ from typing import List, Tuple
 from src.utils.generators.generatorInstance import generatorInstance
 
 # ----------------- paramètres globaux -----------------
-NB_TRUCKS = 1000
+NB_TRUCKS = loadVar("NB_TRUCKS", int)
 RANDOM_SEED = loadVar("SEED2",int)
 random.seed(RANDOM_SEED)
 
@@ -244,4 +244,4 @@ def algoGenetics():
             full_back, dist_back = expand_order_to_full_route(back_order, nxt, shortest_dist)
             truck_total_distance += dist_back
         print(f"Distance totale estimée pour camion {truck_id} : {truck_total_distance:.2f} km")
-        return truck_total_distance, full_route
+    return truck_total_distance, full_route

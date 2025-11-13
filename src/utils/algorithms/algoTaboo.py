@@ -4,7 +4,7 @@ from math import inf
 from src.utils.generators.generatorInstance import generatorInstance
 
 # -------- Paramètres --------
-NB_TRUCKS = 1000
+NB_TRUCKS = loadVar("NB_TRUCKS", int)
 TABU_MAX_ITER = 100
 TABU_TENURE = 10
 RANDOM_SEED = loadVar("SEED2",int)
@@ -300,5 +300,5 @@ def algoTaboo():
         # print("Route complète parcourue :")
         # print(" -> ".join(truck_full_route) if truck_full_route else "(aucune)")
         print(f"Distance totale estimée pour camion {truck_id} : {truck_total_distance:.2f} km")
-        return truck_total_distance, truck_full_route
+    return truck_total_distance, truck_full_route
 
