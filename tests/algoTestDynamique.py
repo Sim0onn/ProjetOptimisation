@@ -2,7 +2,7 @@ from math import inf
 from src.utils.generators.generatorInstance import generatorInstance
 from src.utils.utilsTraffic import generateTrafficGraphs
 
-VITESSE_BASE = 60  # km/h
+VITESSE_BASE = 60  
 nb_trucks = 3
 
 graph = generatorInstance()

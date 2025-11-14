@@ -41,6 +41,47 @@ def run_executions(nb):
     df = pd.DataFrame(results)
     return df
 
+def run_taboo(nb):
+    results = []
+
+    for i in range(nb):
+        print(f"----------------------- itération {i} -----------------------")
+        update_env_seed(i)
+
+        start = time.time()
+        taboo_distance, taboo_route = algoTaboo()
+        taboo_time = time.time() - start
+        print(f"Tabou → {taboo_distance:.2f} km en {taboo_time:.2f}s")
+
+        results.append({
+                "iteration": i,
+                "algo": "Tabou",
+                "distance": taboo_distance,
+                "time": taboo_time
+            })
+    df = pd.DataFrame(results)
+    return df
+
+def run_genetics(nb):
+    results = []
+
+    for i in range(nb):
+        print(f"----------------------- itération {i} -----------------------")
+        update_env_seed(i)
+
+        start = time.time()
+        genetics_distance, genetics_route = algoTaboo()
+        genetics_time = time.time() - start
+        print(f"genetics → {genetics_distance:.2f} km en {genetics_time:.2f}s")
+
+        results.append({
+                "iteration": i,
+                "algo": "genetics",
+                "distance": genetics_distance,
+                "time": genetics_time
+            })
+    df = pd.DataFrame(results)
+    return df
 
 # --- Exécution ---
 df_results = run_executions(10)

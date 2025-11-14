@@ -10,7 +10,7 @@ SEED = int(os.getenv("SEED", 42))
 
 def generatorWarehouse(start=0, nb_it=NB_INSTANCES):
     """
-    Génère un entrepôt avec 10 objets consécutifs à partir de l'index `start`.
+    Génère un entrepôt avec 10 objets du même type consécutifs à partir de l'index `start`.
     """
     warehouse = Warehouse()
 

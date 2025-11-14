@@ -7,6 +7,9 @@ load_dotenv()
 NB_INSTANCES = str(os.getenv("NB_INSTANCES"))
 
 def generatorGraph(nb_it=NB_INSTANCES):
+    """
+    Génère un Graph à partir du nb de villes entrée en param ou le nombre de la var .env.`.
+    """
 
     path_file = f"fixtures/graphs/graph_{nb_it}.csv"
     graph = Graph()
